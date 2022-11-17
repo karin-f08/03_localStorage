@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="memopad.css">
+    <title>カウントアップタイマー</title>
+</head>
+<body>
+<h1>課題用カウントアップタイマー</h1>
+    <!-- タイマー部分 -->
+  <div id="conteiner">
+    <div id="timer">00:00:00,000</div>
+    <div class="btns">
+      <div class="btn" id="start" onclick="audio()">start</div>
+      <div class="btn" id="lap" onclick="audio()">wrap</div>
+      <div class="btn" id="reset" onclick="audio()">stop</div>
+    </div>
+  </div>
+
+  <textarea id="text_area"></textarea>
+  <ul>
+    <button>Save</button>
+    <button>Clear</button>
+  </ul>
+
+  <audio id="btn_audio">
+    <source src="./決定ボタンを押す22.mp3" type="audio/mp3">
+</audio>
+
+
+
+
+    <script src="memopad.js">
+        
+    </script>
+</body>
+</html>
