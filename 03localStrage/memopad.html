@@ -8,31 +8,49 @@
     <title>カウントアップタイマー</title>
 </head>
 <body>
-<h1>課題用カウントアップタイマー</h1>
+<div class="タイマー">
+<h1>課題用タイマー</h1>
     <!-- タイマー部分 -->
-  <div id="conteiner">
+  <div class="conteiner">
+    
     <div id="timer">00:00:00,000</div>
+  
     <div class="btns">
       <div class="btn" id="start" onclick="audio()">start</div>
-      <div class="btn" id="lap" onclick="audio()">wrap</div>
-      <div class="btn" id="reset" onclick="audio()">stop</div>
+      <div class="btn" id="stop" onclick="audio()">stop</div>
+      <div class="btn" id="reset" onclick="audio()">reset</div>
+    
+    
     </div>
+ 
+
+  <div class = "list-box">
+    <p>記録</p>
+    <ul id="list"></ul>
+   
   </div>
 
-  <textarea id="text_area"></textarea>
-  <ul>
-    <button>Save</button>
-    <button>Clear</button>
-  </ul>
+  <main>
+    <textarea id="text_area"></textarea>
+    <ul>
+      <li id="save">Save</li>
+      <li id="clear">Clear</li>
+    </ul>
+  </main>
+
+</div>
 
   <audio id="btn_audio">
     <source src="./決定ボタンを押す22.mp3" type="audio/mp3">
 </audio>
 
+</div>
 
-
+</div>
 
     <script src="memopad.js">
+
+
         
     </script>
 </body>

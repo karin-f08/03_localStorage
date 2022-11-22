@@ -5,52 +5,90 @@ function audio() {
 
 
 
-const timer = document.getElementById('timer');
- const start=document.getElementById("start");
- const stop=document.getElementById("stop");
+ const timer = document.getElementById('timer');
+ const startButton=document.getElementById("start");
+ const stopButton=document.getElementById("stop");
+ const resetButton =document.getElementById("reset");
+ const lapArea = document.getElementById("lapArea");
 
  let startTime;
- let timeoutId;
+ let timeoutID;
+ let stopTime = 0;
 
 
-start.addEventListener('click', () => {
+ function displayTime() {
+  const currentTime = new Date(Date.now() - startTime + stopTime);
+  const h = String(currentTime.getHours()-9).padStart(2, '0');
+  const m = String(currentTime.getMinutes()).padStart(2, '0');
+  const s = String(currentTime.getSeconds()).padStart(2, '0');
+  const ms = String(currentTime.getMilliseconds()).padStart(3, '0');
+
+  timer.textContent = `${h}:${m}:${s}.${ms}`;
+  timeoutID = setTimeout(displayTime, 10);
+  console.log(timer);
+}
+
+// スタートボタンがクリックされたら時間を進める
+ startButton.addEventListener('click', () => {
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  resetButton.disabled = true;
   startTime = Date.now();
-  console.log(startTime);
-  console.log(new Date(startTime))
-  countUp();
+  displayTime();
 });
 
- function countUp() {
-  const d=new Date(Date.now()-startTime);
-  const h=String(d.getHours()-9).padStart(2,"0");
-  const m=String(d.getMinutes()).padStart(2,"0");
-  const s=String(d.getSeconds()).padStart(2,"0");
-  const ms =String(d.getMilliseconds()).padStart(3,"0");
-  timer.textContent = `${h}:${m}:${s},${ms}`;
+// ストップボタンがクリックされたら時間を止める
+  stopButton.addEventListener('click', function ()  {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = false;
+  clearTimeout(timeoutID);
+  stopTime += (Date.now() - startTime);
+});
+  
+// リセットボタンがクリックされたら時間を0に戻す
+resetButton.addEventListener('click', function() {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = true;
+  timer.textContent = '00:00:00.000';
+  stopTime = 0;
+  const element = document.createElement('li');
+  element.innerHTML = stopTime;
+  list.appendChild(element);
+
+});
 
 
-  timeoutId = setTimeout(() => {
-    countUp();
-  }, 10);
- }
+const list = document.getElementById('list');
 
-  stop.addEventListener('click', () => {
-    clearTimeout(timeoutId);
-  });
+
+//記録された時間を消す
+const buttonClear = document.getElementsById('button-clear');
+
+buttonClear.addEventListener ('click',function(){
+  list.removeChild(list.lastChild);
+});
+
 
 //保存
 $('#save').on('click',function(){
-    const text = $('#text_area').val();
-    //console.log(text);
-    localStorage.setItem('memo',text);
-  });
+  const text = $('#text_area').val();
+  //console.log(text);
+  localStorage.setItem('memo',text);
+});
+//削除
 
- 
+
+$("#clear").on("click", function () {
+localStorage.removeItem("memo");
+$("#text_area").val("");
+});
 
 if(localStorage.getItem("memo")){
-  const text = localStorage.getItem("memo");
-  console.log(text);
-  $("#text_area").val(text);
+const text = localStorage.getItem("memo");
+console.log(text);
+$("#text_area").val(text);
 
 
 
